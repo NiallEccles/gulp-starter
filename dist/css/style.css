@@ -1,0 +1,23 @@
+body {
+  background: #F4414A;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Roboto', 'Droid Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+
+body > img {
+  width: 100px; }
+
+::selection {
+  background: #ffffff;
+  color: #F4414A; }
+
+::-moz-selection {
+  background: #ffffff;
+  color: #F4414A; }
