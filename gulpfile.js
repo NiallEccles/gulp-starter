@@ -3,6 +3,8 @@ const imagemin = require('gulp-imagemin');
 const uglify = require('gulp-uglify');
 const sass = require('gulp-sass');
 const concat = require('gulp-concat');
+const babel = require('gulp-babel');
+const minify = require('gulp-babel-minify');
 
 //Logs message
 gulp.task('message', function(){
@@ -23,9 +25,17 @@ gulp.task('imagemin', function(){
 });
 
 //Minify scripts
-gulp.task('minify', function(){
+gulp.task('scripts', function(){
 	gulp.src('src/js/*.js')
-		.pipe(uglify())
+		.pipe(babel({
+			presets: ['env']
+		}))
+		.pipe(concat('script.js'))
+		.pipe(minify({
+			mangle: {
+				keepClassName: true
+			}
+		}))
 		.pipe(gulp.dest('dist/js'))
 });
 
@@ -37,12 +47,12 @@ gulp.task('sass', function(){
 });
 
 //Concat scripts
-gulp.task('scripts', function(){
-	gulp.src('src/js/*.js')
-		.pipe(concat('script.js'))
-		.pipe(uglify())
-		.pipe(gulp.dest('dist/js'))
-});
+// gulp.task('scripts', function(){
+// 	gulp.src('src/js/*.js')
+// 		.pipe(concat('script.js'))
+// 		.pipe(sourcemaps.write('.'))
+// 		.pipe(gulp.dest('dist/js'))
+// });
 
 //Run build tasks
 gulp.task('build', ['html','imagemin','sass', 'scripts']);
