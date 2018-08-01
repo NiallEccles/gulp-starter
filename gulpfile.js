@@ -1,4 +1,5 @@
 const gulp = require('gulp');
+const sourcemaps = require('gulp-sourcemaps');
 const imagemin = require('gulp-imagemin');
 const uglify = require('gulp-uglify');
 const sass = require('gulp-sass');
@@ -27,6 +28,7 @@ gulp.task('imagemin', function(){
 //Transpile and Minify scripts
 gulp.task('scripts', function(){
 	gulp.src('src/js/*.js')
+		.pipe(sourcemaps.init())
 		.pipe(babel({
 			presets: ['env']
 		}))
@@ -36,6 +38,7 @@ gulp.task('scripts', function(){
 				keepClassName: true
 			}
 		}))
+		.pipe(sourcemaps.write('.'))
 		.pipe(gulp.dest('dist/js'))
 });
 
