@@ -24,7 +24,7 @@ gulp.task('imagemin', function(){
         .pipe(gulp.dest('dist/images'))
 });
 
-//Minify scripts
+//Transpile and Minify scripts
 gulp.task('scripts', function(){
 	gulp.src('src/js/*.js')
 		.pipe(babel({
@@ -45,14 +45,6 @@ gulp.task('sass', function(){
 		.pipe(sass().on('error', sass.logError))
 		.pipe(gulp.dest('dist/css'))
 });
-
-//Concat scripts
-// gulp.task('scripts', function(){
-// 	gulp.src('src/js/*.js')
-// 		.pipe(concat('script.js'))
-// 		.pipe(sourcemaps.write('.'))
-// 		.pipe(gulp.dest('dist/js'))
-// });
 
 //Run build tasks
 gulp.task('build', ['html','imagemin','sass', 'scripts']);
