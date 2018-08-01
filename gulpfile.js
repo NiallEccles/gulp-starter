@@ -7,6 +7,7 @@ const concat = require('gulp-concat');
 const babel = require('gulp-babel');
 const minify = require('gulp-babel-minify');
 const browserSync = require('browser-sync').create();
+const autoprefixer = require('gulp-autoprefixer');
 
 //Logs message
 gulp.task('message', function(){
@@ -47,7 +48,14 @@ gulp.task('scripts', function(){
 //Compile Sass
 gulp.task('sass', function(){
 	gulp.src('src/sass/*.scss')
+		.pipe(sourcemaps.init())
 		.pipe(sass().on('error', sass.logError))
+		.pipe(
+			autoprefixer({
+				browsers: ['last 2 versions'],
+				cascade: false
+		}))
+		.pipe(sourcemaps.write('.'))
 		.pipe(gulp.dest('dist/css'))
 		.pipe(browserSync.stream());
 });

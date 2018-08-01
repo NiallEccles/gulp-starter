@@ -4,15 +4,28 @@ body {
   height: 100vh;
   margin: 0;
   padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   color: #ffffff;
   font-family: -apple-system, BlinkMacSystemFont, 'Roboto', 'Droid Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
 
 body > img {
   width: 100px; }
+
+::-moz-selection {
+  background: #ffffff;
+  color: #F4414A; }
 
 ::selection {
   background: #ffffff;
@@ -21,3 +34,5 @@ body > img {
 ::-moz-selection {
   background: #ffffff;
   color: #F4414A; }
+
+/*# sourceMappingURL=style.css.map */
