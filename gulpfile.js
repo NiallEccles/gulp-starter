@@ -6,6 +6,7 @@ const sass = require('gulp-sass');
 const concat = require('gulp-concat');
 const babel = require('gulp-babel');
 const minify = require('gulp-babel-minify');
+const browserSync = require('browser-sync').create();
 
 //Logs message
 gulp.task('message', function(){
@@ -40,6 +41,7 @@ gulp.task('scripts', function(){
 		}))
 		.pipe(sourcemaps.write('.'))
 		.pipe(gulp.dest('dist/js'))
+		.pipe(browserSync.stream());
 });
 
 //Compile Sass
@@ -47,6 +49,7 @@ gulp.task('sass', function(){
 	gulp.src('src/sass/*.scss')
 		.pipe(sass().on('error', sass.logError))
 		.pipe(gulp.dest('dist/css'))
+		.pipe(browserSync.stream());
 });
 
 //Run build tasks
@@ -54,8 +57,11 @@ gulp.task('build', ['html','imagemin','sass', 'scripts']);
 
 //Watch files for changes
 gulp.task('watch', function(){
+	browserSync.init({
+		proxy: 'localhost/gulp-starter/dist/index.html'
+    });
 	gulp.watch('src/js/*.js', ['scripts']);
 	gulp.watch('src/images/*', ['imagemin']);
 	gulp.watch('src/sass/*.scss', ['sass']);
-	gulp.watch('src/*.html', ['html']);
+	gulp.watch('src/*.html', ['html']).on('change', browserSync.reload);
 });
