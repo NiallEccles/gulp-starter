@@ -66,7 +66,10 @@ gulp.task('build', ['html','imagemin','sass', 'scripts']);
 //Watch files for changes
 gulp.task('watch', function(){
 	browserSync.init({
-		proxy: 'localhost/gulp-starter/dist/index.html'
+		server: {
+            baseDir: "./dist/"
+        }
+		// proxy: 'localhost/gulp-starter/dist/index.html'
     });
 	gulp.watch('src/js/*.js', ['scripts']);
 	gulp.watch('src/images/*', ['imagemin']);
